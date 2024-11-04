@@ -9,4 +9,4 @@ app.get('/',function(req,res){
 })
 
 app.listen(port)
-
+// first npm init -y , npm install express then node index.js
