@@ -1,10 +1,10 @@
 const express = require("express")
 const app = express()
 
-const user=[{
+let user=[{
     name:"ayushman",
     kidneys:[{
-        healthy:false
+        healthy:true
     },]
 }]
 app.use(express.json())
@@ -37,24 +37,59 @@ app.post('/',function(req,res){
 
 
 app.put('/',function(req,res){
-    for (let i = 0; i < user[0].kidneys.length; i++) {
-        user[0].kidneys[i].healthy=true;
+    if (areEveryKIdneyHealthy()) {
+        res.status(411).json({
+            msg:"every kidney is healthy"
+        })
+    }else{
+        for (let i = 0; i < user[0].kidneys.length; i++) {
+            user[0].kidneys[i].healthy=true;
+        }
+        res.json({})
     }
-    res.json({})
+    
 })
 
+// delete all the unhealthy kidneys
 app.delete('/',function(req,res){
-    let newKidneys=[]
-    for (let i = 0; i < user[0].kidneys.length; i++) {
-        if (user[0].kidneys[i].healthy) {
-            newKidneys.push({
-                healthy:true
-            })
+    if (isAtleastOneUnHealthyKidneys()) {
+        let newKidneys=[]
+        for (let i = 0; i < user[0].kidneys.length; i++) {
+            if (user[0].kidneys[i].healthy) {
+                newKidneys.push({
+                    healthy:true
+                })
+            }
+        }
+        user[0].kidneys=newKidneys
+        res.json({msg:"done"})
+    }else{
+        res.status(411).json({
+            msg:"you have no bad kidneys"
+        })
+    }
+    
+})
+
+function isAtleastOneUnHealthyKidneys() {
+    let isAtleastOneUnHealthyKidneys =false
+    for(let i=0;i<user[0].kidneys.length;i++){
+        if(!user[0].kidneys[i].healthy){
+            isAtleastOneUnHealthyKidneys =true 
         }
     }
-    user[0].kidneys=newKidneys
-    res.json({})
-})
+    return isAtleastOneUnHealthyKidneys
+}
 
+function areEveryKIdneyHealthy() {
+    let areEveryKIdneyHealthy =false
+    for(let i=0;i<user[0].kidneys.length;i++){
+        if(user[0].kidneys[i].healthy){
+            areEveryKIdneyHealthy =true 
+        }
+    }
+    return areEveryKIdneyHealthy
+}
+console.log(areEveryKIdneyHealthy());
 
 app.listen(3001, () => console.log("Server running on port 3001"));
