@@ -1,8 +1,4 @@
-function Greet(){
-    console.log("ni haoooo");
-}
-function Greetalien(){
-    console.log("ni haoooo alien");
-}
 
-setInterval(Greetalien,2000)
+var value=12
+console.log(Math.pow(value,2));
+
