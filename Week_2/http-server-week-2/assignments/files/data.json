@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": " dsa",
+        "completion": false,
+        "description": "i should do dsa"
+    },
+    {
+        "id": 2,
+        "title": " web dev",
+        "completion": true,
+        "description": "dev is fun"
+    },
+    {
+        "id": 3,
+        "title": "gym",
+        "completion": true,
+        "description": "health is wealth"
+    },
+    {
+        "id": 4,
+        "title": "read a book",
+        "completion": false,
+        "description": "reading makes u wise"
+    },
+    {
+        "id": 5,
+        "title": "piano",
+        "completion": false,
+        "description": " freshness"
+    }
+]
